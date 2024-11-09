@@ -1,0 +1,10 @@
+const mongoose = require("mongoose");
+
+exports.addParking = async (req , res , next) => {
+    try{
+        return res.status(200).json("successfully tested");
+    }
+    catch(err){
+        next(err);
+    }
+}
