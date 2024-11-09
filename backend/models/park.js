@@ -7,37 +7,24 @@ const parkSchema = new Schema({
         type : String,
         required : true
     },
+    title : {
+        type : String,
+        required : true
+    },
     description : {
         type : String,
         required : true
     },
-    twoWheelPrice : {
+    price : {
         type : Number,
         required : true
     },
-    fourWheelPrice : {
-        type : Number,
-        required : true
-    },
-    twoWheelCapacity : {
-        type : Number,
-        required : true
-    },
-    fourWheelCapacity : {
+    capacity : {
         type : Number,
         required : true
     },
     //first line of address
-    firstLine : {
-        type : String,
-        required : true
-    },
-    //second line of address
-    secondLine : {
-        type : String
-    },
-    //title of the parking
-    title : {
+    fullAddress : {
         type : String,
         required : true
     },
