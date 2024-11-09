@@ -15,19 +15,11 @@ const parkSchema = new Schema({
         type : String,
         required : true
     },
-    twoWheelPrice : {
+    price : {
         type : Number,
         required : true
     },
-    fourWheelPrice : {
-        type : Number,
-        required : true
-    },
-    twoWheelCapacity : {
-        type : Number,
-        required : true
-    },
-    fourWheelCapacity : {
+    capacity : {
         type : Number,
         required : true
     },
