@@ -45,7 +45,6 @@ exports.createBooking = async(req , res , next) => {
         const date = req.body.date;
         const checkin = req.body.checkin;
         const checkout = req.body.checkout;
-        const amount = req.body.amount;
         const numberPlate = req.body.numberPlate;
         const phone = req.body.phone;
         const email = req.body.email;
@@ -55,7 +54,6 @@ exports.createBooking = async(req , res , next) => {
             date : date,
             checkIn : checkin,
             checkOut : checkout,
-            amount : amount,
             numberPlate : numberPlate,
             phone : phone,
             email : email,
@@ -143,3 +141,25 @@ exports.checkAvailability = async(req , res , next) => {
     }
 }
 
+
+exports.getBookings = async(req , res , next) => {
+    try{
+        const bookings = await Booking.find({
+            email : req.params.email
+        })
+        return res.status(200).json(bookings);
+    }
+    catch(err){
+        next(err);
+    }
+}
+
+exports.getMyParkings = async(req , res , next) => {
+    try{
+        const parkings = await Park.find({userID : req.params.email});
+        return res.status(200).json(parkings);
+    }
+    catch(err){
+        next(err);
+    }
+}

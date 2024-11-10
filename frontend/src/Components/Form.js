@@ -1,11 +1,13 @@
+import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState } from 'react';
 
-function Form({onClose}) {
+function Form({ onClose }) {
+  const { user } = useAuth0();
   const [formData, setFormData] = useState({
     name: '',
     description: '',
-    pricePerHour: 0, 
-    capacity: 0, 
+    pricePerHour: 0,
+    capacity: 0,
     address: '',
     phone: '',
     pincode: '',
@@ -24,22 +26,45 @@ function Form({onClose}) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const savedLocation = JSON.parse(localStorage.getItem('userLocation'));
-
-    if (savedLocation) {
-      const formDataWithLocation = {
-        ...formData,
-        latitude: savedLocation.latitude,
-        longitude: savedLocation.longitude,
-      };
-      console.log(formDataWithLocation);
-    } else {
-      console.log('Location data is not available in local storage.');
-    }
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        const { latitude, longitude } = position.coords;
+        const res = await fetch('http://localhost:8080/add-parking', {
+          method: "post",
+          body: JSON.stringify({
+            "latitude": latitude,
+            "longitude": longitude,
+            "userID": user.email,
+            "title": formData.name,
+            "description": formData.description,
+            "price": formData.pricePerHour,
+            "city": formData.city,
+            "state": formData.state,
+            "fullAddress": formData.address,
+            "landmark": formData.landmark,
+            "phone": formData.phone,
+            "pincode": formData.pincode,
+            "capacity": formData.capacity,
+          }),
+          headers: {
+            "Content-type": "application/json"
+          }
+        });
+        if(!res.ok){
+          alert("Failed to add parking");
+        }
+        else{
+          alert("parking successfully added");
+        }
+      },
+      (error) => {
+        alert("Location permission is required to display nearby parking places. Please allow location access.");
+      }
+    );
     onClose();
   };
   const handleClose = (e) => {
-    e.preventDefault(); 
+    e.preventDefault();
     if (Object.values(formData).some(value => value !== '' && value !== 0)) {
       if (window.confirm('Are you sure you want to close? Any unsaved changes will be lost.')) {
         onClose();
@@ -51,10 +76,10 @@ function Form({onClose}) {
   return (
     <div style={styles.overlay}>
       <div style={styles.container}>
-        
+
         <h2 style={styles.title}>Register Your Parking Spot</h2>
         <form style={styles.form} onSubmit={handleSubmit}>
-        <button onClick={handleClose}  style={styles.closeButton}>×</button>
+          <button onClick={handleClose} style={styles.closeButton}>×</button>
           <div style={styles.field}>
             <label style={styles.label}>Name of the Parking</label>
             <input
@@ -85,7 +110,7 @@ function Form({onClose}) {
               onChange={handleChange}
               style={styles.input}
               required
-              min="0" 
+              min="0"
             />
           </div>
           <div style={styles.field}>
@@ -97,7 +122,7 @@ function Form({onClose}) {
               onChange={handleChange}
               style={styles.input}
               required
-              min="0" 
+              min="0"
             />
           </div>
           <div style={styles.field}>
@@ -198,8 +223,8 @@ const styles = {
   },
   closeButton: {
     position: 'absolute',
-    top: '60px',
-    right: '370px',
+    top: '1rem',
+    right: '10rem',
     fontSize: '1.5rem',
     background: 'none',
     border: 'none',

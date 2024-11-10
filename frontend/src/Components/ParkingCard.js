@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import '../ParkingCard.css';  
 import Checkin from './Checkin';
+import Car from '../images/car.jpg';
 
-
-const ParkingCard = ({ image, name, twoWheelers, fourWheelers }) => {
+const ParkingCard = ({ title, price, capacity , address , description , owner , id}) => {
     const [isFormVisible, setIsFormVisible] = useState(false);
     const handleCloseForm = () => {
       setIsFormVisible(false);
@@ -14,16 +14,19 @@ const ParkingCard = ({ image, name, twoWheelers, fourWheelers }) => {
   return (
     <div className="parking-card">
       <div className="parking-card-image">
-        <img src={image} alt="Parking Place" />
+        <img src={Car} alt="Parking Place" />
       </div>
       <div className="parking-card-details">
-        <h3 className="parking-card-title">{name}</h3>
+        <h3 className="parking-card-title">{title}</h3>
         <div className="parking-card-availability">
-          <p><strong>Two-wheelers available:</strong> {twoWheelers}</p>
-          <p><strong>Four-wheelers available:</strong> {fourWheelers}</p>
+          <p><strong>Description</strong> {description}</p>
+          <p><strong>Price</strong> {price}</p>
+          <p><strong>capacity</strong> {capacity}</p>
+          <p><strong>Complete address</strong> {address}</p>
+          <p><strong>Contact Owner :</strong> +91  {owner}</p>
         </div>
-        <button onClick = {handleOpenForm} className="view-parking-btn">View Parking</button>
-        {isFormVisible && <Checkin onClose={handleCloseForm} />}
+        <button onClick = {handleOpenForm} className="view-parking-btn">Book Parking</button>
+        {isFormVisible && <Checkin onClose={handleCloseForm} parkID={id}/>}
       </div>
     </div>
   );

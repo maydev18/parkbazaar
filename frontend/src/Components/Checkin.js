@@ -1,21 +1,17 @@
 import React, { useState } from 'react';
 import '../ParkingCard.css';  
+import { useAuth0 } from '@auth0/auth0-react';
 
-
-
-
-function Checkin({onClose}) {
+function Checkin({onClose , parkID}) {
+  const {user} = useAuth0();
   const [formData, setFormData] = useState({
     name: '',
-    description: '',
-    pricePerHour: 0, 
-    capacity: 0, 
-    address: '',
+    checkin: '',
+    checkout: '',
+    numberPlate: '',
     phone: '',
-    pincode: '',
-    landmark: '',
-    state: '',
-    city: '',
+    date: '',
+    email : user.email,
   });
 
   const handleChange = (e) => {
@@ -23,11 +19,36 @@ function Checkin({onClose}) {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    console.log(formData);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log(formData);
+    if(formData.checkin >= formData.checkout){
+      return alert("Checkin time must be less than checkout time");
+    }
+    const res = await fetch("http://localhost:8080/add-booking" , {
+      method : "post",
+      body : JSON.stringify({
+        date : formData.date,
+        checkin : formData.checkin,
+        checkout : formData.checkout,
+        phone : formData.phone,
+        email : formData.email,
+        parkID : parkID,
+        numberPlate : formData.numberPlate,
+        name : formData.name
+      }),
+      headers : {
+        'content-type' : "application/json"
+      }
+    })
+    if(!res.ok){
+      alert("Booking failed");
+    }
+    else{
+      alert("Booking confirmed");
+    }
     onClose();
   };
   const handleClose = (e) => {
@@ -81,22 +102,11 @@ function Checkin({onClose}) {
             />
           </div>
           <div style={styles.field}>
-            <label style={styles.label}>Space Needed</label>
-            <input
-              type="text"
-              name="space"
-              value={formData.space}
-              onChange={handleChange}
-              style={styles.input}
-              required
-            />
-          </div>
-          <div style={styles.field}>
             <label style={styles.label}>Check-in Time</label>
             <input
               type="time"
-              name="checkinTime"
-              value={formData.checkinTime}
+              name="checkin"
+              value={formData.checkin}
               onChange={handleChange}
               style={styles.input}
               required
@@ -106,8 +116,8 @@ function Checkin({onClose}) {
             <label style={styles.label}>Check-out Time</label>
             <input
               type="time"
-              name="checkoutTime"
-              value={formData.checkoutTime}
+              name="checkout"
+              value={formData.checkout}
               onChange={handleChange}
               style={styles.input}
               required
@@ -117,8 +127,8 @@ function Checkin({onClose}) {
             <label style={styles.label}>Vehicle Number</label>
             <input
               type="text"
-              name="vehicleNumber"
-              value={formData.vehicleNumber}
+              name="numberPlate"
+              value={formData.numberPlate}
               onChange={handleChange}
               style={styles.input}
               required

@@ -25,10 +25,6 @@ const bookingSchema = new Schema({
         type : String,
         required : true
     },
-    amount : {
-        type : Number,
-        required : true
-    },
     parkID : {
         type : Schema.Types.ObjectId,
         ref : 'Parking'
