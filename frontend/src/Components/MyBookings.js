@@ -3,34 +3,9 @@
 import React, { useEffect, useState } from "react";
 import BookingCard from "./BookingCard";
 import { useAuth0 } from "@auth0/auth0-react";
+import { findByLabelText } from "@testing-library/react";
 // React functional component
 const MyBookings = () => {
-<<<<<<< HEAD
-    const [bookings, setBookings] = useState([]);
-    const {user , isLoading} = useAuth0();
-    useEffect(() => {
-        const fetchBooking = async () => {
-            const data = await fetch("http://localhost:8080/get-bookings/" + user.email);
-            const res = await data.json();
-            console.log(res);
-            setBookings(res);
-        }
-        if(user){
-            fetchBooking();
-        }
-        
-    }, [isLoading])
-    return (
-        <>
-        <h1>My Bookings</h1>
-        <div style={{display : "flex" , flexDirection : "row"}}>
-            {bookings.map((booking , index) => (
-                <BookingCard data={booking}/>
-            ))}
-        </div>
-        </>
-    );
-=======
   const [bookings, setBookings] = useState([]);
   const { user, isLoading } = useAuth0();
   useEffect(() => {
@@ -73,13 +48,15 @@ const MyBookings = () => {
   </h1>
 </div>
 
-
+    <div style = {{display: "flex",
+        flexDirection: "row",
+    }}>
       {bookings.map((booking, index) => (
         <BookingCard data={booking} />
       ))}
+    </div>
     </>
   );
->>>>>>> f449fe34e04aa8f04adc7461aaec6094f3cdf40f
 };
 
 export default MyBookings;

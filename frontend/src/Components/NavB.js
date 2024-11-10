@@ -1,15 +1,8 @@
-<<<<<<< HEAD
-import React from 'react';
-import { Navbar, Nav, Container } from 'react-bootstrap';
-import { useAuth0 } from '@auth0/auth0-react';
-import { NavLink } from 'react-router-dom';
-=======
 import React from "react";
-import { Link } from "react-scroll";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { useAuth0 } from "@auth0/auth0-react";
 import { NavLink } from "react-router-dom";
->>>>>>> f449fe34e04aa8f04adc7461aaec6094f3cdf40f
+import logo from "../images/logo.png";
 
 function NavB() {
   const { loginWithPopup, user, isAuthenticated, logout } = useAuth0();
@@ -18,7 +11,7 @@ function NavB() {
     <Navbar expand="lg" bg="dark" variant="dark" sticky="top">
       <Container>
         <Navbar.Brand as={NavLink} to="/">
-          Park Bazaar
+          <img src = {logo }></img>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">

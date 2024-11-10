@@ -27,10 +27,10 @@ function Home() {
     <div>
       <div style={styles.backgroundContainer}>
         <div style={styles.overlayContainer}>
-          <button style={styles.button} onClick={handleFindParkingClick}>
-            Find me a parking spot.
-          </button>
-          <button style={styles.button} onClick={handleGiveParkingClick}>
+        <button style={{ ...styles.button, ...styles.buttonHover }} onClick={handleFindParkingClick}>
+  Find me a parking spot.
+</button>
+          <button style={{ ...styles.button, ...styles.buttonHover }} onClick={handleGiveParkingClick}>
             Give my space as a parking spot.
           </button>
           {isFormVisible && <Form onClose={handleCloseForm} />}
