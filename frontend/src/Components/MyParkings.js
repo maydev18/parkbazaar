@@ -15,9 +15,35 @@ function MyParkings() {
         if(user)fetchparking();
     } ,  [isLoading]) 
   return (
+<<<<<<< HEAD
     <div>
       <h1>Your Parking Spots</h1>
       <div style={{display : "flex" , flexDirection : "row"}}>
+=======
+       <div style={{
+  display: "flex",
+  justifyContent: "center",  // Center horizontally
+  alignItems: "center",      // Center vertically
+  height: "20vh",           // Full viewport height
+  margin: 0,                 // Remove default margin
+}}>
+  <h1 style={{
+    fontSize: "36px",          // Adjust the font size
+    fontWeight: "bold",        // Make the text bold
+    color: "#2C3E50",          // Set a stylish color for the text
+    textAlign: "center",       // Center align the text
+    textTransform: "uppercase",// Make the text uppercase
+    letterSpacing: "3px",      // Add space between the letters
+    textShadow: "3px 3px 6px rgba(0, 0, 0, 0.2)", // Add a subtle text shadow
+    background: "linear-gradient(to right, #ff7e5f, #feb47b)", // Add a gradient background to the text
+    backgroundClip: "text",    // Apply the gradient to the text itself
+    padding: "20px",           // Add padding around the text
+    borderRadius: "10px",      // Round the corners of the background
+    fontFamily: "'Segoe UI', Tahoma, Geneva, Verdana, sans-serif", // Custom font
+  }}>
+    Your Parking Spots
+  </h1>
+>>>>>>> f449fe34e04aa8f04adc7461aaec6094f3cdf40f
         {parkings.map((park , index) =>
             <MyParkingCard item = {park} />
         )}

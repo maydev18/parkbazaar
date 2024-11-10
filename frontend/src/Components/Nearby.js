@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import ParkingCard from './ParkingCard';
+import img7 from "../images/img7.png";
 
 const Nearby = () => {
   const [parking , setParking] = useState([]);
-  const [locationAllowed, setLocationAllowed] = useState(false);
+  const [locationAllowed, setLocationAllowed] = useState(true);
 
   useEffect(() => {
     const requestLocation = () => {
@@ -34,7 +35,7 @@ const Nearby = () => {
   }, []);
 
   return (
-    <div>
+    <div style={styles.bg}>
       <h1 style={{ textAlign: 'center' }}>Available Parking Places</h1>
       {locationAllowed ? (
         <>
@@ -60,5 +61,17 @@ const Nearby = () => {
     </div>
   );
 }
-
+const styles = {
+  bg:{
+  backgroundImage: `url(${img7})`, 
+  backgroundSize: 'cover', 
+  backgroundPosition: 'center', 
+  padding: '20px',
+  minHeight: '100vh',
+  display: 'flex',
+  flexDirection: 'column',
+  alignItems: 'center',
+  justifyContent: 'center'
+  },
+};
 export default Nearby;
