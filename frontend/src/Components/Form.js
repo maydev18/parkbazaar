@@ -1,7 +1,8 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import React, { useState } from 'react';
-
-function Form({ onClose }) {
+import { useNavigate } from 'react-router-dom';
+function Form({ onClose }) { 
+  const navigate = useNavigate();
   const { user } = useAuth0();
   const [formData, setFormData] = useState({
     name: '',
@@ -55,6 +56,7 @@ function Form({ onClose }) {
         }
         else{
           alert("parking successfully added");
+          navigate('/my-parkings');
         }
       },
       (error) => {

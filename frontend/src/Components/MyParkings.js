@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import MyParkingCard from './MyParkingCard';
 import { useAuth0 } from '@auth0/auth0-react';
 
-
 function MyParkings() {
     const [parkings , setParkings] = useState([]);
     const {user , isLoading} = useAuth0();
@@ -18,9 +17,11 @@ function MyParkings() {
   return (
     <div>
       <h1>Your Parking Spots</h1>
+      <div style={{display : "flex" , flexDirection : "row"}}>
         {parkings.map((park , index) =>
             <MyParkingCard item = {park} />
         )}
+        </div>
     </div>
   );
 }

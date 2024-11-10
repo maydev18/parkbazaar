@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import '../ParkingCard.css';  
 import { useAuth0 } from '@auth0/auth0-react';
-
+import { useNavigate } from 'react-router-dom';
 function Checkin({onClose , parkID}) {
+  const navigate = useNavigate();
   const {user} = useAuth0();
   const [formData, setFormData] = useState({
     name: '',
@@ -48,6 +49,7 @@ function Checkin({onClose , parkID}) {
     }
     else{
       alert("Booking confirmed");
+      navigate('/my-bookings');
     }
     onClose();
   };

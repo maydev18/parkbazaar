@@ -22,9 +22,11 @@ const MyBookings = () => {
     return (
         <>
         <h1>My Bookings</h1>
-        {bookings.map((booking , index) => (
-            <BookingCard data={booking}/>
-        ))}
+        <div style={{display : "flex" , flexDirection : "row"}}>
+            {bookings.map((booking , index) => (
+                <BookingCard data={booking}/>
+            ))}
+        </div>
         </>
     );
 };
