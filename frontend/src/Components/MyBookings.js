@@ -11,7 +11,7 @@ const MyBookings = () => {
   useEffect(() => {
     const fetchBooking = async () => {
       const data = await fetch(
-        "http://localhost:8080/get-bookings/" + user.email
+        "https://parkbazaar.onrender.com/get-bookings/" + user.email
       );
       const res = await data.json();
       console.log(res);

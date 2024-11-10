@@ -7,7 +7,7 @@ function MyParkings() {
     const { user, isLoading } = useAuth0();
     useEffect(() => {
         const fetchparking = async () => {
-            const res = await fetch("http://localhost:8080/get-my-parkings/" + user.email);
+            const res = await fetch("https://parkbazaar.onrender.com/get-my-parkings/" + user.email);
             const data = await res.json();
             console.log(data);
             setParkings(data);

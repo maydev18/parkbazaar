@@ -12,7 +12,7 @@ const Nearby = () => {
             async (position) => {
               setLocationAllowed(true);
               const { latitude, longitude } = position.coords;
-              const res = await fetch('http://localhost:8080/get-parkings' , {
+              const res = await fetch('https://parkbazaar.onrender.com/get-parkings' , {
                 method : "post",
                 body : JSON.stringify({
                   "latitude" : latitude,

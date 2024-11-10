@@ -30,7 +30,7 @@ function Form({ onClose }) {
     navigator.geolocation.getCurrentPosition(
       async (position) => {
         const { latitude, longitude } = position.coords;
-        const res = await fetch('http://localhost:8080/add-parking', {
+        const res = await fetch('https://parkbazaar.onrender.com/add-parking', {
           method: "post",
           body: JSON.stringify({
             "latitude": latitude,

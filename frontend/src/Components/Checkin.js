@@ -28,7 +28,7 @@ function Checkin({onClose , parkID}) {
     if(formData.checkin >= formData.checkout){
       return alert("Checkin time must be less than checkout time");
     }
-    const res = await fetch("http://localhost:8080/add-booking" , {
+    const res = await fetch("https://parkbazaar.onrender.com/add-booking" , {
       method : "post",
       body : JSON.stringify({
         date : formData.date,
