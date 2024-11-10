@@ -47,7 +47,7 @@ const Nearby = () => {
                 description={park.description}
                 price={park.price}
                 capacity={park.capacity}
-                address={park.fullAddress + " " + park.city + " " + park.state + " " + park.landmark + " " + park.pincode}
+                address={park.fullAddress + ", " + park.city + ", " + park.state + ", " + park.landmark + ", " + park.pincode}
                 owner = {park.phone}
                 id={park._id}
               />

@@ -2,13 +2,18 @@ import React, { useState } from 'react';
 import '../ParkingCard.css';  
 import Checkin from './Checkin';
 import Car from '../images/car.jpg';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const ParkingCard = ({ title, price, capacity , address , description , owner , id}) => {
     const [isFormVisible, setIsFormVisible] = useState(false);
+    const {isAuthenticated} = useAuth0();
     const handleCloseForm = () => {
       setIsFormVisible(false);
     };
     const handleOpenForm = () => {
+      if(!isAuthenticated){
+        return alert("Please login to continue");
+      }
       setIsFormVisible(true);
     };
   return (

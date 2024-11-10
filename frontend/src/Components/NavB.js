@@ -13,26 +13,16 @@ function NavB() {
         <Navbar.Brand as={NavLink} to="/">ParkBazaar</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="ml-auto">
-            {/* Use react-scroll's Link for in-page smooth scrolling */}
-            <Link to="/" >
-              <Nav.Link as="span">Home</Nav.Link>
-            </Link>
-            <Link to="/" >
-              <Nav.Link as="span">About</Nav.Link>
-            </Link>
-            
+          <Nav className="ml-auto">            
             {/* Use NavLink from react-router-dom for route-based links */}
-            <Nav.Link as={NavLink} to="/services">Services</Nav.Link>
             {!isAuthenticated && (
-              <Nav.Link as="span" onClick={() => loginWithPopup()}>Login</Nav.Link>
+              <Nav.Link onClick={() => loginWithPopup()}>Login</Nav.Link>
             )}
             {isAuthenticated && (
-              <Nav.Link as="span" onClick={() => logout()}>Logout</Nav.Link>
+              <Nav.Link onClick={() => logout()}>Logout</Nav.Link>
             )}
-            <Nav.Link as={NavLink} to="/contact">Contact</Nav.Link>
-            <Nav.Link as={NavLink} to="/my-bookings">My Bookings</Nav.Link>
-            <Nav.Link as={NavLink} to="/my-parkings">My Parkings</Nav.Link>
+            {isAuthenticated && <Nav.Link as={NavLink} to="/my-bookings">My Bookings</Nav.Link>}
+            {isAuthenticated && <Nav.Link as={NavLink} to="/my-parkings">My Parkings</Nav.Link>}
             
             {/* Display user's name if authenticated */}
             {isAuthenticated && (
